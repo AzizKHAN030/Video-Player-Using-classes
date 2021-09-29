@@ -15,6 +15,7 @@ module.exports = {
             includes: './app/src/includes/**/*.*',
             lang: './app/src/lang/**/*.*',
             php: './app/src/**/*.php',
+            video: './app/src/**/*.{mp4,mpeg4,avi}',
         },
         build: {
             html: './app/dist/',
@@ -24,7 +25,8 @@ module.exports = {
             img: './app/dist/images/',
             includes: './app/dist/includes/',
             lang: './app/dist/lang/',
-            php: './app/dist/'
+            php: './app/dist/',
+            video: './app/dist/'
         },
         watch: {
             html: ['./app/src/*.{html,pug,jade}', './app/src/components/*.{html,pug,jade}'],

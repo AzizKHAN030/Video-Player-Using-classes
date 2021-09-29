@@ -4,7 +4,7 @@ global.$ = require('./gulp.config')
 $.path.tasks.forEach(task => require(task)());
 
 if ($.dev) {
-    $.gulp.series($.gulp.parallel('html', 'css', 'js', 'font', 'includes', 'lang', 'img', 'watch', 'server', 'php'))()
+    $.gulp.series($.gulp.parallel('html', 'css', 'js', 'font', 'includes', 'lang', 'img', 'watch', 'server', 'php', 'video'))()
 } else {
     $.gulp.src($.path.serverDir, {
             read: false
@@ -12,5 +12,5 @@ if ($.dev) {
         .pipe($.plugins.clean({
             force: true
         }))
-        .pipe($.gulp.dest('./app/').on('end', $.gulp.series($.gulp.parallel('html', 'css', 'js', 'font', 'img', 'includes', 'lang', 'php'))))
+        .pipe($.gulp.dest('./app/').on('end', $.gulp.series($.gulp.parallel('html', 'css', 'js', 'font', 'img', 'includes', 'lang', 'php','video'))))
 }
