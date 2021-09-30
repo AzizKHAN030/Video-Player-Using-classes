@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="css/main.min.css">
     <title>Video Player</title>
 </head>
@@ -12,7 +13,18 @@
     
     <div class="player">
         <video src="video.mp4"></video>
-        
+        <div class="controls">
+           <div class="controls__inner">
+            <button class="controls__inner-play"><i class="fas fa-play"></i></button>
+            <div class="controls__sound">
+                <button class="controls__sound-mute"><i class="fas fa-volume-up"></i></button>
+                <div class="controls__sound-line" data-value="1">
+                    <div class="line"></div>
+                </div>
+            </div>
+            <button class="controls__inner-fullscreen"><i class="fas fa-expand"></i></button>
+           </div>
+        </div>
         
     </div>
     
