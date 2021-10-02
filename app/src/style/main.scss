@@ -52,6 +52,7 @@ body{
         position: absolute;
         bottom: 0;
         background:rgba($color: #000000, $alpha: 0.4);
+        padding: 5px 0;
         &__inner{
             max-width: 70%;
             margin: 0 auto;
@@ -158,6 +159,39 @@ body{
         }
         
     }
+    
+    .seek{
+        display: flex;
+        position: absolute;
+
+        top: 0;
+        background:rgba($color: #ff0000, $alpha: 0.5);
+        height: 100%;
+        width: 15%;
+        justify-content: center;
+        align-items:center;
+        cursor: pointer;
+        color: #fff;
+        opacity: 0;
+        transition: .3s all;
+        i{
+            margin: 0 5px;
+            pointer-events: none;
+        }
+        span{
+            pointer-events: none;
+        }
+        &-prev{
+            left: 0;
+        }
+        &-next{
+            right: 0;
+        }
+        &:hover{
+            opacity: 1;
+        }
+    }
+    
 }
 
 

@@ -8,7 +8,11 @@
      playVideo() {
          this.video.addEventListener('click', this.toggleVideo.bind(this));
          this.player.querySelector('.controls__inner-play').addEventListener('click', this.toggleVideo.bind(this));
-         document.addEventListener('keyup',(e)=>{if(e.code==='Space'){this.toggleVideo()}});
+         document.addEventListener('keyup', (e) => {
+             if (e.code === 'Space') {
+                 this.toggleVideo()
+             }
+         });
          this.video.addEventListener('dblclick', this.toggleFullscreen.bind(this));
          this.player.querySelector('.controls__inner-fullscreen').addEventListener('click', this.toggleFullscreen.bind(this));
          this.player.querySelector('.controls__sound-mute').addEventListener('click', this.muteSound.bind(this));
@@ -16,8 +20,12 @@
          this.player.querySelector('.controls__timeline').addEventListener('click', this.setLine.bind(this));
          this.video.addEventListener('loadedmetadata', this.timeUpdate.bind(this));
          this.playbackBtns = this.player.querySelectorAll('.controls__playback-btn');
-         this.playbackBtns.forEach((btn)=>{btn.addEventListener('click',this.setSpeed.bind(this))});
-
+         this.playbackBtns.forEach((btn) => {
+             btn.addEventListener('click', this.setSpeed.bind(this))
+         });
+         this.player.querySelectorAll('.seek').forEach((el) => {
+             el.addEventListener('click', this.seekVideo.bind(this))
+         })
 
 
          this.volumeIcon = this.player.querySelector('.controls__sound-mute i');
@@ -85,32 +93,40 @@
      }
 
      timeUpdate() {
-        const vidDuration = this.player.querySelector('.controls__time .time');
-        const vidCurrent = this.player.querySelector('.controls__time .time-current');
-        const timeLine = this.player.querySelector('.controls__timeline');
-        vidDuration.innerHTML = `${Math.floor(this.video.duration/60)>=10?Math.round(this.video.duration/60):'0'+Math.round(this.video.duration/60)}:${Math.floor(this.video.duration%60)>=10?Math.round(this.video.duration%60):'0'+Math.floor(this.video.duration%60)}`;
+         const vidDuration = this.player.querySelector('.controls__time .time');
+         const vidCurrent = this.player.querySelector('.controls__time .time-current');
+         const timeLine = this.player.querySelector('.controls__timeline');
+         vidDuration.innerHTML = `${Math.floor(this.video.duration/60)>=10?Math.round(this.video.duration/60):'0'+Math.round(this.video.duration/60)}:${Math.floor(this.video.duration%60)>=10?Math.round(this.video.duration%60):'0'+Math.floor(this.video.duration%60)}`;
 
-        this.video.addEventListener('timeupdate', () => {
-            vidCurrent.innerHTML = `${Math.floor(this.video.currentTime/60)>=10?Math.floor(this.video.currentTime/60):'0'+Math.floor(this.video.currentTime/60)}:${
+         this.video.addEventListener('timeupdate', () => {
+             vidCurrent.innerHTML = `${Math.floor(this.video.currentTime/60)>=10?Math.floor(this.video.currentTime/60):'0'+Math.floor(this.video.currentTime/60)}:${
                    Math.floor(this.video.currentTime%60)>=10?Math.floor(this.video.currentTime%60):'0'+Math.floor(this.video.currentTime%60)
                }`;
 
-            timeLine.setAttribute('data-value', this.video.currentTime / this.video.duration);
-            timeLine.querySelector('.line').style.width = `${timeLine.getAttribute('data-value')*100}%`;
-        })
+             timeLine.setAttribute('data-value', this.video.currentTime / this.video.duration);
+             timeLine.querySelector('.line').style.width = `${timeLine.getAttribute('data-value')*100}%`;
+         })
 
 
-    }
+     }
 
-    setSpeed(e){
-       this.playbackBtns.forEach((btn)=>{
-           btn.classList.remove('active');
-       });
-       e.target.classList.add('active');
-       this.video.playbackRate = e.target.getAttribute('data-speed');
-       
-    }
+     setSpeed(e) {
+         this.playbackBtns.forEach((btn) => {
+             btn.classList.remove('active');
+         });
+         e.target.classList.add('active');
+         this.video.playbackRate = e.target.getAttribute('data-speed');
 
+     }
+
+     seekVideo(e) {
+        if(e.target.classList.contains('seek-prev')){
+            this.video.currentTime-=5;
+        }else if(e.target.classList.contains('seek-next')){
+            this.video.currentTime+=5;
+        }
+
+     }
  }
 
 
