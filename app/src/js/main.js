@@ -2,9 +2,36 @@
      constructor(selector) {
          this.player = document.querySelector(selector);
          this.video = this.player.querySelector('video');
+         this.setHTML();
          this.playVideo();
      }
 
+     setHTML(){
+         this.player.insertAdjacentHTML('beforeend',`   <div class="seek seek-prev"><i class="fas fa-angle-double-left"></i><span>5 SEC</span></div>
+         <div class="seek seek-next"><span>5 SEC</span><i class="fas fa-angle-double-right"></i></div>
+         <div class="controls">
+            <div class="controls__inner">
+             <button class="controls__inner-play"><i class="fas fa-play"></i></button>
+             <div class="controls__playback">
+                 <button class="controls__playback-btn" data-speed="0.5">0.5X</button>
+                 <button class="controls__playback-btn active" data-speed="1">1X</button>
+                 <button class="controls__playback-btn" data-speed="1.5">1.5X</button>
+             </div>
+             <div class="controls__timeline">
+                 <div class="line"></div>
+             </div>
+             <div class="controls__time"><span class="time-current">00:00</span>/<span class="time">00:00</span></div>
+             <div class="controls__sound">
+                 <button class="controls__sound-mute"><i class="fas fa-volume-up"></i></button>
+                 <div class="controls__sound-line" data-value="1">
+                     <div class="line"></div>
+                 </div>
+             </div>
+             <button class="controls__inner-fullscreen"><i class="fas fa-expand"></i></button>
+            </div>
+         </div>`)
+     }
+     
      playVideo() {
          this.video.addEventListener('click', this.toggleVideo.bind(this));
          this.player.querySelector('.controls__inner-play').addEventListener('click', this.toggleVideo.bind(this));
@@ -25,7 +52,8 @@
          });
          this.player.querySelectorAll('.seek').forEach((el) => {
              el.addEventListener('click', this.seekVideo.bind(this))
-         })
+         });
+         
 
 
          this.volumeIcon = this.player.querySelector('.controls__sound-mute i');
@@ -130,4 +158,4 @@
  }
 
 
- const player = new Player('.player')
+ const player = new Player('#player')
