@@ -8,13 +8,15 @@
      playVideo() {
          this.video.addEventListener('click', this.toggleVideo.bind(this));
          this.player.querySelector('.controls__inner-play').addEventListener('click', this.toggleVideo.bind(this));
-         document.addEventListener('keyup',(e)=>{if(e.code==='Space'){console.log(561);this.toggleVideo()}});
+         document.addEventListener('keyup',(e)=>{if(e.code==='Space'){this.toggleVideo()}});
          this.video.addEventListener('dblclick', this.toggleFullscreen.bind(this));
          this.player.querySelector('.controls__inner-fullscreen').addEventListener('click', this.toggleFullscreen.bind(this));
          this.player.querySelector('.controls__sound-mute').addEventListener('click', this.muteSound.bind(this));
          this.player.querySelector('.controls__sound-line').addEventListener('click', this.setLine.bind(this));
          this.player.querySelector('.controls__timeline').addEventListener('click', this.setLine.bind(this));
          this.video.addEventListener('loadedmetadata', this.timeUpdate.bind(this));
+         this.playbackBtns = this.player.querySelectorAll('.controls__playback-btn');
+         this.playbackBtns.forEach((btn)=>{btn.addEventListener('click',this.setSpeed.bind(this))});
 
 
 
@@ -22,12 +24,9 @@
      }
 
      toggleVideo() {
+         const playIcon = this.player.querySelector('.controls__inner-play i');
          this.playing = !this.playing;
          this.video[this.playing ? 'play' : 'pause']();
-         console.log(this.video.duration);
-
-
-         const playIcon = this.player.querySelector('.controls__inner-play i');
          playIcon.classList.toggle('fa-pause', this.playing);
          playIcon.classList.toggle('fa-play', !this.playing);
      }
@@ -35,9 +34,6 @@
 
      toggleFullscreen() {
          const full = !document.fullscreenElement;
-         console.log(full);
-
-
          const screenIcon = this.player.querySelector('.controls__inner-fullscreen i');
          screenIcon.classList.toggle('fa-compress', full);
          screenIcon.classList.toggle('fa-expand', !full);
@@ -50,20 +46,20 @@
 
      muteSound() {
          this.muted = !this.muted;
-
          this.volumeIcon.classList.toggle('fa-volume-mute', this.muted);
          this.volumeIcon.classList.toggle('fa-volume-up', !this.muted);
 
          if (this.muted) {
              this.video.volume = 0;
+             this.player.querySelector('.controls__sound-line .line').style.width = '0%';
          } else {
              this.video.volume = this.player.querySelector('.controls__sound-line').getAttribute('data-value');
+             this.player.querySelector('.controls__sound-line .line').style.width = `${this.video.volume*100}%`;
          }
 
      }
 
      setLine(e) {
-         console.log(e);
          const width = e.offsetX;
          const parentWidth = e.target.clientWidth;
          e.target.querySelector('.line').style.width = `${width/parentWidth*100}%`;
@@ -85,7 +81,6 @@
 
      setTime() {
          const duration = this.video.duration;
-         console.log(duration);
          this.video.currentTime = this.player.querySelector('.controls__timeline').getAttribute('data-value') * duration
      }
 
@@ -107,6 +102,14 @@
 
     }
 
+    setSpeed(e){
+       this.playbackBtns.forEach((btn)=>{
+           btn.classList.remove('active');
+       });
+       e.target.classList.add('active');
+       this.video.playbackRate = e.target.getAttribute('data-speed');
+       
+    }
 
  }
 
