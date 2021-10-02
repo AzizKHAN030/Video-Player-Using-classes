@@ -6,8 +6,8 @@
          this.playVideo();
      }
 
-     setHTML(){
-         this.player.insertAdjacentHTML('beforeend',`   <div class="seek seek-prev"><i class="fas fa-angle-double-left"></i><span>5 SEC</span></div>
+     setHTML() {
+         this.player.insertAdjacentHTML('beforeend', `   <div class="seek seek-prev"><i class="fas fa-angle-double-left"></i><span>5 SEC</span></div>
          <div class="seek seek-next"><span>5 SEC</span><i class="fas fa-angle-double-right"></i></div>
          <div class="controls">
             <div class="controls__inner">
@@ -31,7 +31,7 @@
             </div>
          </div>`)
      }
-     
+
      playVideo() {
          this.video.addEventListener('click', this.toggleVideo.bind(this));
          this.player.querySelector('.controls__inner-play').addEventListener('click', this.toggleVideo.bind(this));
@@ -53,7 +53,7 @@
          this.player.querySelectorAll('.seek').forEach((el) => {
              el.addEventListener('click', this.seekVideo.bind(this))
          });
-         
+
 
 
          this.volumeIcon = this.player.querySelector('.controls__sound-mute i');
@@ -66,7 +66,6 @@
          playIcon.classList.toggle('fa-pause', this.playing);
          playIcon.classList.toggle('fa-play', !this.playing);
      }
-
 
      toggleFullscreen() {
          const full = !document.fullscreenElement;
@@ -148,14 +147,13 @@
      }
 
      seekVideo(e) {
-        if(e.target.classList.contains('seek-prev')){
-            this.video.currentTime-=5;
-        }else if(e.target.classList.contains('seek-next')){
-            this.video.currentTime+=5;
-        }
+         if (e.target.classList.contains('seek-prev')) {
+             this.video.currentTime -= 5;
+         } else if (e.target.classList.contains('seek-next')) {
+             this.video.currentTime += 5;
+         }
 
      }
  }
-
 
  const player = new Player('#player')
