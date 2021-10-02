@@ -6,7 +6,9 @@ module.exports = () => {
         .pipe($.plugins.autoprefixer())
         .pipe($.plugins.groupCssMediaQueries())
         .pipe($.plugins.sass({outputStyle: 'compressed'}))
-        .pipe($.plugins.rename('main.min.css'))
+        .pipe($.plugins.rename({
+            extname:'.min.css',
+        }))
         .pipe($.gulp.dest($.path.build.css))
         .on('end', $.bs.reload)
     })

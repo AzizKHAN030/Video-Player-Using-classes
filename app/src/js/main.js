@@ -8,6 +8,7 @@
      playVideo() {
          this.video.addEventListener('click', this.toggleVideo.bind(this));
          this.player.querySelector('.controls__inner-play').addEventListener('click', this.toggleVideo.bind(this));
+         document.addEventListener('keyup',(e)=>{if(e.code==='Space'){console.log(561);this.toggleVideo()}});
          this.video.addEventListener('dblclick', this.toggleFullscreen.bind(this));
          this.player.querySelector('.controls__inner-fullscreen').addEventListener('click', this.toggleFullscreen.bind(this));
          this.player.querySelector('.controls__sound-mute').addEventListener('click', this.muteSound.bind(this));
@@ -89,22 +90,22 @@
      }
 
      timeUpdate() {
-         const vidDuration = this.player.querySelector('.controls__time .time');
-         const vidCurrent = this.player.querySelector('.controls__time .time-current');
-         const timeLine = this.player.querySelector('.controls__timeline');
-         vidDuration.innerHTML = `${Math.floor(this.video.duration/60)>=10?Math.round(this.video.duration/60):'0'+Math.round(this.video.duration/60)}:${Math.floor(this.video.duration%60)>=10?Math.round(this.video.duration%60):'0'+Math.floor(this.video.duration%60)}`;
+        const vidDuration = this.player.querySelector('.controls__time .time');
+        const vidCurrent = this.player.querySelector('.controls__time .time-current');
+        const timeLine = this.player.querySelector('.controls__timeline');
+        vidDuration.innerHTML = `${Math.floor(this.video.duration/60)>=10?Math.round(this.video.duration/60):'0'+Math.round(this.video.duration/60)}:${Math.floor(this.video.duration%60)>=10?Math.round(this.video.duration%60):'0'+Math.floor(this.video.duration%60)}`;
 
-         this.video.addEventListener('timeupdate', () => {
-             vidCurrent.innerHTML = `${Math.floor(this.video.currentTime/60)>=10?Math.floor(this.video.currentTime/60):'0'+Math.floor(this.video.currentTime/60)}:${
-                    Math.floor(this.video.currentTime%60)>=10?Math.floor(this.video.currentTime%60):'0'+Math.floor(this.video.currentTime%60)
-                }`;
+        this.video.addEventListener('timeupdate', () => {
+            vidCurrent.innerHTML = `${Math.floor(this.video.currentTime/60)>=10?Math.floor(this.video.currentTime/60):'0'+Math.floor(this.video.currentTime/60)}:${
+                   Math.floor(this.video.currentTime%60)>=10?Math.floor(this.video.currentTime%60):'0'+Math.floor(this.video.currentTime%60)
+               }`;
 
-             timeLine.setAttribute('data-value', this.video.currentTime / this.video.duration);
-             timeLine.querySelector('.line').style.width = `${timeLine.getAttribute('data-value')*100}%`;
-         })
+            timeLine.setAttribute('data-value', this.video.currentTime / this.video.duration);
+            timeLine.querySelector('.line').style.width = `${timeLine.getAttribute('data-value')*100}%`;
+        })
 
 
-     }
+    }
 
 
  }
